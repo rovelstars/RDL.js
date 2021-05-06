@@ -27,9 +27,7 @@ async function login(key){
   });
 };
 
-async function server(app, basePath){
-  if(basePath==undefined) basePath = "/";
-  if(!basePath.startsWith("/")) basePath="/"+basePath;
+async function server(app){
   if(app==undefined) throw "no_express_server";
   var expressEvent = function(req, res, next){
     event.emit('serverRequest', req);
