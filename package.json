@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "The official SDK/API Wrapper for Rovel Discord List",
   "main": "./src/index.js",
-  "displayName": "rdl.js",
+  "displayName": "RDL.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rovelstars/rdl.js.git"
@@ -19,7 +19,18 @@
     "users",
     "sdk",
     "wrapper",
-    "api"
+    "api",
+    "bot",
+    "discord.js",
+    "botlist",
+    "listing",
+    "com",
+    "rdl",
+    "rovel",
+    "stars",
+    "good",
+    "awesome",
+    "popular"
   ],
   "author": "rovelstars",
   "maintainers": [
@@ -29,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/rovelstars/rdl.js/issues"
   },
-  "homepage": "https://github.com/rovelstars/rdl.js#readme",
+  "homepage": "https://discord.rovelstars.com",
   "dependencies": {
     "rovel.js": "^1.2.0"
   },
