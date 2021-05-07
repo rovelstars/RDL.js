@@ -6,32 +6,33 @@
 ## Using with Discord.js
 
 ```js
-const Discord = require("discord.js");
-const client = new Discord.Client();
-let RDL = require("rdl.js");
+const { Client: DiscordClient } = require("discord.js");
+const { Client: RDLClient } = require("rdl.js")
 
-client.once("ready",()=>{
- console.log("ready!");
+const client = new DiscordClient();
+const RDL = new RDLClient();
+
+client.once("ready", () => {
+    console.log("Discord client is ready!");
 });
 
-//Event emitted after login is successful. Returns an object of your bot that is in our database.
-RDL.once("login",bot=>{
- console.log(`[RDL] Logined as ${bot.tag}`);//you can get the bot object from now on by RDL.client
+// Event emitted after login is successful.
+RDL.once("ready", () => {
+    // Bot data will be available from RDL.bot
+    console.log(`RDL Logged in as ${RDL.bot.tag}`);
+})
+
+// Example - post server stats when bot joins a guild
+client.on("guildCreate", (guild) => {
+    RDL.bot.postServers(client.guilds.cache.size);
 });
 
-//now see an example - post server stats when bot joins a guild, you can even post stats when bot leaves guild.
-client.on("guildCreate",(guild)=>{
- RDL.emit("postServers", (client.guilds.cache.array().length));
-});
-
-//time for making a webhook server using express!
+// Example - webhook server using express
 let express = require("express");
 let app = express();
-app.use(RDL.server, "/api"); // "/api" is the base url. if you already have a dashboard with your bot, this might be a right choice. But if you just want webhooks and don't have any dashboard or anything like that, use the below code
-/*
-app.use(RDL.server);
-*/
+app.use("/api", RDL.webhooks());
 
 client.login("Your Discord Bot Token");
-RDL.login("Your RDL bot token").catch(e=>console.log("Error Occurred! "+e));//e is a string
+RDL.login("Your RDL bot token")
+    .catch(e => console.error("Error Occurred! " + e));
 ```

@@ -1,11 +1,9 @@
 {
   "name": "rdl.js",
   "version": "1.0.1",
-  "description": "The official SDK for Rovel Discord List",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"No need to test it dumb!\""
-  },
+  "description": "The official SDK/API Wrapper for Rovel Discord List",
+  "main": "./src/index.js",
+  "displayName": "rdl.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rovelstars/rdl.js.git"
@@ -19,10 +17,14 @@
     "servers",
     "emojis",
     "users",
-    "next-gen",
-    "sdk"
+    "sdk",
+    "wrapper",
+    "api"
   ],
   "author": "rovelstars",
+  "maintainers": [
+    "mrTomatoLegit"
+  ],
   "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/rovelstars/rdl.js/issues"
@@ -30,5 +32,8 @@
   "homepage": "https://github.com/rovelstars/rdl.js#readme",
   "dependencies": {
     "rovel.js": "^1.2.0"
+  },
+  "optionalDependencies": {
+    "express": "^4.17.1"
   }
 }
