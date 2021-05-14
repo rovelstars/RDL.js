@@ -3,6 +3,11 @@ const ClientBot = require("../structures/ClientBot");
 const { Events } = require("../constants");
 const BaseClient = require("./BaseClient");
 
+const ClientEvents = {
+    ready: ["string"],
+    vote: ["string"]
+}
+
 /**
  * @extends BaseClient
  */
@@ -68,6 +73,14 @@ class Client extends BaseClient {
         })
 
         return router
+    }
+
+    /**
+     *
+     * @param {keyof ClientEvents} event
+     */
+    on(event, ...listeners) {
+        super.on(event, ...listeners)
     }
 }
 
