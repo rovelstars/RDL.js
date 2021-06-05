@@ -1,8 +1,8 @@
-const constants = require("../constants");
+const constants = require('../constants');
 
 class Util {
     constructor() {
-        throw Util.makeError("Util class must not be called")
+        throw Util.makeError('Util class must not be called');
     }
 
     /**
@@ -11,7 +11,7 @@ class Util {
      * @returns {Error}
      */
     static makeError(message) {
-        return new Error(`${constants.ERROR_PREFIX} ${message}`)
+        return new Error(`${constants.ERROR_PREFIX} ${message}`);
     }
 
     /**
@@ -20,8 +20,15 @@ class Util {
      * @returns {Error}
      */
     static makeApiError(message) {
-        return new Error(`${constants.API_ERROR_PREFIX} ${message}`)
+        return new Error(`${constants.API_ERROR_PREFIX} ${message}`);
+    }
+
+    static resolveUserAgent() {
+        const package = require('../../package.json');
+        return `${package.name} (${require('os').version()}) RDL.js/${package.version} Node.js/${
+            process.versions.node
+        }`;
     }
 }
 
-module.exports = Util
+module.exports = Util;

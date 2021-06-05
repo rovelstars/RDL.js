@@ -1,19 +1,19 @@
-const api = require("../rest/api");
-const ClientBot = require("../structures/ClientBot");
-const { Events } = require("../constants");
-const BaseClient = require("./BaseClient");
+const api = require('../rest/api');
+const ClientBot = require('../structures/ClientBot');
+const { Events } = require('../constants');
+const BaseClient = require('./BaseClient');
 
 const ClientEvents = {
-    ready: ["string"],
-    vote: ["string"]
-}
+    ready: ['string'],
+    vote: ['string']
+};
 
 /**
  * @extends BaseClient
  */
 class Client extends BaseClient {
     constructor() {
-        super()
+        super();
         /**
          * KEEP THIS PRIVATE
          * @type {string}
@@ -24,6 +24,8 @@ class Client extends BaseClient {
          * @type {ClientBot}
          */
         this.bot = null;
+
+        this.api = api;
     }
 
     /**
@@ -33,13 +35,16 @@ class Client extends BaseClient {
      */
     login(code) {
         return new Promise((resolve, reject) => {
-            api.bots.fetchBotFromCode(code).then(data => {
-                this.bot = new ClientBot(this, data)
-                this.code = code
-                this.emit(Events.CLIENT_READY)
-                resolve(this.bot)
-            }).catch(e => reject(e))
-        })
+            api.bots
+                .fetchBotFromCode(code)
+                .then(data => {
+                    this.bot = new ClientBot(this, data);
+                    this.code = code;
+                    this.emit(Events.CLIENT_READY);
+                    resolve(this.bot);
+                })
+                .catch(e => reject(e));
+        });
     }
 
     /**
@@ -49,30 +54,31 @@ class Client extends BaseClient {
      */
     webhooks() {
         try {
-            var express = require("express")
+            var express = require('express');
         } catch {}
 
-        if (!express) return
-        const router = express.Router()
+        if (!express) return;
+        const router = express.Router();
 
-        router.get("/", (req, res) => { // Ok but why
+        router.get('/', (req, res) => {
+            // Ok but why
             res.json({
-                status: "UP"  // What about HTTP code 200?
-            }).end()
-        })
+                status: 'UP' // What about HTTP code 200?
+            }).end();
+        });
 
-        router.use(express.json("*/*"))
+        router.use(express.json('*/*'));
 
-        router.post("/vote", (req, res) => {
-            if (!req.query.code) return res.json({ err: "no_code" }).end() // HTTP error 401
-            if (req.query.code !== this.code) return res.json({ err: "invalid_code" }).end() // HTTP error 401
+        router.post('/vote', (req, res) => {
+            if (!req.query.code) return res.json({ err: 'no_code' }).end(); // HTTP error 401
+            if (req.query.code !== this.code) return res.json({ err: 'invalid_code' }).end(); // HTTP error 401
 
-            this.emit("vote", req.body) // This is temporary, I need a structure for this
+            this.emit('vote', req.body); // This is temporary, I need a structure for this
 
-            res.json({ ok: true }).end() // Replace with HTTP error 204
-        })
+            res.json({ ok: true }).end(); // Replace with HTTP error 204
+        });
 
-        return router
+        return router;
     }
 
     /**
@@ -80,8 +86,8 @@ class Client extends BaseClient {
      * @param {keyof ClientEvents} event
      */
     on(event, ...listeners) {
-        super.on(event, ...listeners)
+        return super.on(event, ...listeners);
     }
 }
 
-module.exports = Client
+module.exports = Client;

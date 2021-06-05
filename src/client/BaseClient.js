@@ -1,12 +1,12 @@
-const EventEmitter = require("events");
+const EventEmitter = require('events');
 
 /**
  * @extends EventEmitter
  */
 class BaseClient extends EventEmitter {
     constructor() {
-        super()
+        super();
     }
 }
 
-module.exports = BaseClient
+module.exports = BaseClient;

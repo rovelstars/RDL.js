@@ -1,6 +1,6 @@
 {
   "name": "rdl.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The official SDK/API Wrapper for Rovel Discord List",
   "main": "./src/index.js",
   "displayName": "RDL.js",

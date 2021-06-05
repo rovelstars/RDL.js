@@ -1,4 +1,4 @@
-const Client = require("../client/Client")
+const Client = require('../client/Client');
 
 class Bot {
     /**
@@ -7,105 +7,105 @@ class Bot {
      * @param {*} data
      */
     constructor(client, data) {
-        this.client = client
+        this.client = client;
 
         /**
          * @type {string}
          */
-        this.owners = data.owners
+        this.owners = data.owners;
 
         /**
          * @type {boolean}
          */
-        this.verified = data.verified
+        this.verified = data.verified;
 
         /**
          * @type {boolean}
          */
-        this.added = data.added
+        this.added = data.added;
 
         /**
          * @type {boolean}
          */
-        this.promoted = data.promoted
+        this.promoted = data.promoted;
 
         /**
          * @type {number}
          */
-        this.votes = data.votes
+        this.votes = data.votes;
 
         /**
          * @type {Array<string>}
          */
-        this.badges = data.badges
+        this.badges = data.badges;
 
         /**
          * @type {string}
          */
-        this.id = data.id
+        this.id = data.id;
 
         /**
          * @type {string}
          */
-        this.username = data.username
+        this.username = data.username;
 
         /**
          * @type {string}
          */
-        this.discriminator = data.discriminator
+        this.discriminator = data.discriminator;
 
         /**
          * @type {string}
          */
-        this.avatar = data.avatar
+        this.avatar = data.avatar;
 
         /**
          * @type {string}
          */
-        this.short = data.short
+        this.short = data.short;
 
         /**
          * @type {string}
          */
-        this.desc = data.desc
+        this.desc = data.desc;
 
-        this.prefix = data.prefix
-
-        /**
-         * @type {string}
-         */
-        this.lib = data.lib
+        this.prefix = data.prefix;
 
         /**
          * @type {string}
          */
-        this.support = data.support
+        this.lib = data.lib;
 
         /**
          * @type {string}
          */
-        this.invite = data.invite
+        this.support = data.support;
+
+        /**
+         * @type {string}
+         */
+        this.invite = data.invite;
 
         /**
          * @type {Array<string>}
          */
-        this.servers = data.servers
+        this.servers = data.servers;
 
         /**
          * @type {string}
          */
-        this.avatarURL = data.avatarURL
+        this.avatarURL = data.avatarURL;
 
         /**
          * @type {string}
          */
-        this.tag = data.tag
+        this.tag = data.tag;
 
         /**
          * @type {string}
          */
-        this.timestamp = data.timestamp
+        this.timestamp = data.timestamp;
     }
 }
 
-module.exports = Bot
+module.exports = Bot;
