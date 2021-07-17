@@ -42,6 +42,7 @@
   },
   "homepage": "https://discord.rovelstars.com",
   "dependencies": {
+    "discord.js": "^12.5.3",
     "rovel.js": "^1.2.0"
   },
   "optionalDependencies": {

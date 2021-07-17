@@ -25,7 +25,7 @@ class Util {
 
     static resolveUserAgent() {
         const pkg = require('../../package.json');
-        return `${pkg.name} (${require('os').platform()}) RDL.js/${pkg.version} Node.js/${process.version}`;
+        return `${pkg.name} (Platform/${require('os').platform()}; RDL.js/${pkg.version}; Node.js/${process.version});`;
     }
 }
 

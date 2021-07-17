@@ -1,6 +1,7 @@
 const api = require('../rest/api');
+const {fetch} = require('rovel.js');
 const ClientBot = require('../structures/ClientBot');
-const { Events } = require('../constants');
+const { Events, API_ERROR_PREFIX, PROTOCOL, BASE_HOST, API_PATH } = require('../constants');
 const BaseClient = require('./BaseClient');
 
 const ClientEvents = {
@@ -12,8 +13,21 @@ const ClientEvents = {
  * @extends BaseClient
  */
 class Client extends BaseClient {
-    constructor() {
+    constructor(bot) {
         super();
+	//Check Whether the client is real or not.
+	if(typeof (bot?.login || bot?.connect) != "function"){
+		console.log(`${API_ERROR_PREFIX} Instance of Discord.js or Eris Client not given in arguments.`);
+		process.exit(1);
+	}
+	    bot.on('guildCreate', function(guild) {
+		    //discord.js or eris.
+		    this.bot.postServers(bot.guilds.cache.size || bot.guilds.size);
+	    });
+	    bot.on('guildDelete', function(guild) {
+		    //discord.js or eris.
+		    this.bot.postServers(bot.guilds.cache.size || bot.guilds.size);
+	    });
         /**
          * KEEP THIS PRIVATE
          * @type {string}
@@ -24,6 +38,11 @@ class Client extends BaseClient {
          * @type {ClientBot}
          */
         this.bot = null;
+
+	/**
+	 * @type {Discord.Client || Eris.Client}
+	 */
+	this.client = bot;
 
         this.api = api;
     }
@@ -39,6 +58,12 @@ class Client extends BaseClient {
                 .fetchBotFromCode(code)
                 .then(data => {
                     this.bot = new ClientBot(this, data);
+		    if(this.bot.id != this.client.user.id){
+			    console.log(`${API_ERROR_PREFIX} Bot Data doesn't match Client data.\nReporting this to RDL support team and the owners of ${this.client.user.username} bot immediately!`);
+			    fetch(`${PROTOCOL}://${BASE_HOST}/${API_PATH}/bots/report?leaked=${code}`).then(function(){
+			    process.exit(1);
+			    });
+		    }
                     this.code = code;
                     this.emit(Events.CLIENT_READY);
                     resolve(this.bot);

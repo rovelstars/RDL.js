@@ -16,7 +16,7 @@ module.exports = {
             });
     },
     fetchApiCode: async (id, userKey) => {
-        return fetch(`${ENDPOINT}/${id}/apiKey?key=${userKey}`, {
+        return fetch(`${ENDPOINT}/${id}/code?key=${userKey}`, {
             headers: { 'user-agent': Util.resolveUserAgent() }
         })
             .then(async r => await r.json())
