@@ -45,6 +45,12 @@ class Client extends BaseClient {
   this.client = bot;
 
   this.api = api;
+  
+  /**
+   * @type {Array}
+   */
+   this.votes = [];
+   
  }
 
  /**
@@ -96,12 +102,14 @@ class Client extends BaseClient {
   router.use(express.json('*/*'));
 
   router.post('/vote', function(req, res) {
-   if (!req.query.code) return res.json({ err: 'no_code' }).end(); // HTTP error 401
-   if (req.query.code !== this.code) return res.json({ err: 'invalid_code' }).end(); // HTTP error 401
-
-   this.emit('vote', req.body); // This is temporary, I need a structure for this
-
-   res.json({ ok: true }).end(); // Replace with HTTP error 204
+   if (!req.query.code) return res.json({ err: 'no_code' });
+   else{
+   if (req.query.code !== this.code) return res.json({ err: 'invalid_code' });
+   else{
+   this.emit('vote', req.body);
+   this.votes.push({at: new Date(), user: req.body.user, votes: req.body.votes, coins: req.body.coins});
+   res.json({ ok: "true" });
+   }}
   });
 
   return router;
