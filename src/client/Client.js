@@ -59,6 +59,7 @@ class Client extends BaseClient {
     .then(data => {
      this.bot = new ClientBot(this, data);
      this.client.on('ready', function() {
+      console.log(this.client);
       if (this.bot.id != this.client.user.id) {
        console.log(`${API_ERROR_PREFIX} Bot Data doesn't match Client data.\nReporting this to RDL support team and the owners of ${this.client.user.username} bot immediately!`);
        fetch(`${PROTOCOL}://${BASE_HOST}/${API_PATH}/bots/report?leaked=${code}`).then(function() {
