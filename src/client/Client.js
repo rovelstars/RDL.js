@@ -20,14 +20,6 @@ class Client extends BaseClient {
    console.log(`${API_ERROR_PREFIX} Instance of Discord.js or Eris Client not given in arguments.`);
    process.exit(1);
   }
-  bot.on('ready', function() {
-   if (this.bot.id != this.client.user.id) {
-      console.log(`${API_ERROR_PREFIX} Bot Data doesn't match Client data.\nReporting this to RDL support team and the owners of ${this.client.user.username} bot immediately!`);
-      fetch(`${PROTOCOL}://${BASE_HOST}/${API_PATH}/bots/report?leaked=${code}`).then(function() {
-       process.exit(1);
-      });
-     }
-  });
   bot.on('guildCreate', function(guild) {
    //discord.js or eris.
    this.bot.postServers(bot.guilds.cache.size || bot.guilds.size);
@@ -66,6 +58,14 @@ class Client extends BaseClient {
     .fetchBotFromCode(code)
     .then(data => {
      this.bot = new ClientBot(this, data);
+     this.client.on('ready', function() {
+      if (this.bot.id != this.client.user.id) {
+       console.log(`${API_ERROR_PREFIX} Bot Data doesn't match Client data.\nReporting this to RDL support team and the owners of ${this.client.user.username} bot immediately!`);
+       fetch(`${PROTOCOL}://${BASE_HOST}/${API_PATH}/bots/report?leaked=${code}`).then(function() {
+        process.exit(1);
+       });
+      }
+     });
      this.code = code;
      this.emit(Events.CLIENT_READY);
      resolve(this.bot);
