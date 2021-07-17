@@ -4,9 +4,9 @@ const EventEmitter = require('events');
  * @extends EventEmitter
  */
 class BaseClient extends EventEmitter {
-    constructor() {
-        super();
-    }
+ constructor() {
+  super();
+ }
 }
 
 module.exports = BaseClient;

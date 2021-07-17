@@ -1,4 +1,4 @@
 module.exports = {
-    bots: require('./endpoints/bots'),
-    servers: require('./endpoints/servers')
+ bots: require('./endpoints/bots'),
+ servers: require('./endpoints/servers')
 };
