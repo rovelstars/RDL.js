@@ -56,6 +56,7 @@ class Client extends BaseClient {
   return new Promise(function(resolve, reject){
    var that = this;
    api.bots.fetchBotFromCode(code).then(function(data){
+    console.log("debug:"+that);
      that.bot = new ClientBot(that, data);
      that.client.on('ready', function() {
       console.log(that.client);
