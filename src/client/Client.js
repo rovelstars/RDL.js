@@ -53,8 +53,8 @@ class Client extends BaseClient {
   * @returns {Promise<ClientBot>}
   */
  login(code) {
+  var that = this;
   return new Promise(function(resolve, reject){
-   var that = this;
    api.bots.fetchBotFromCode(code).then(function(data){
     console.log("debug:"+that);
      that.bot = new ClientBot(that, data);
