@@ -53,10 +53,10 @@ class Client extends BaseClient {
   * @returns {Promise<ClientBot>}
   */
  login(code) {
-  return new Promise((resolve, reject) => {
+  return new Promise(function(resolve, reject){
    api.bots
     .fetchBotFromCode(code)
-    .then(data => {
+    .then(function(data){
      this.bot = new ClientBot(this, data);
      this.client.on('ready', function() {
       console.log(this.client);
@@ -71,7 +71,7 @@ class Client extends BaseClient {
      this.emit(Events.CLIENT_READY);
      resolve(this.bot);
     })
-    .catch(e => reject(e));
+    .catch(function(e){ reject(e)});
   });
  }
 
@@ -88,7 +88,7 @@ class Client extends BaseClient {
   if (!express) return;
   const router = express.Router();
 
-  router.get('/', (req, res) => {
+  router.get('/', function(req, res) {
    // Ok but why
    res.json({
     status: 'UP' // What about HTTP code 200?
@@ -97,7 +97,7 @@ class Client extends BaseClient {
 
   router.use(express.json('*/*'));
 
-  router.post('/vote', (req, res) => {
+  router.post('/vote', function(req, res) {
    if (!req.query.code) return res.json({ err: 'no_code' }).end(); // HTTP error 401
    if (req.query.code !== this.code) return res.json({ err: 'invalid_code' }).end(); // HTTP error 401
 
