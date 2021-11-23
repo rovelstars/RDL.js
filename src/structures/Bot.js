@@ -105,6 +105,11 @@ class Bot {
    * @type {string}
    */
   this.timestamp = data.timestamp;
+  
+  /**
+   * @type {string}
+   */
+   this.slug = data.slug;
  }
 }
 

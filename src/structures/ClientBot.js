@@ -40,6 +40,15 @@ class ClientBot extends Bot {
    throw Util.makeError('updateCard must have all 3 arguments specified');
   return api.bots.updateCard(this.id, this.client);
  }
+ 
+ /**
+  * @param {string} userId
+  * @returns
+  */
+ async getRDLuser(userId){
+   if(!userId) throw Util.makeError('specify a user ID to check on RDL');
+   return api.users.fetch(userId);
+ }
 }
 
 module.exports = ClientBot;
